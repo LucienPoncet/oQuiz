@@ -1,0 +1,36 @@
+<%- include("../partials/header") %>
+
+<main class="container py-4">
+
+  <h1>Thèmes</h1>
+ 
+  <% for (const tag of tags){ %>
+   <% if (tag.quizzes.length) { %>
+  <div>
+
+    <span class="badge bg-primary p-2 mb-1" id="tag<%= tag.id %>"><%=tag.name%></span>
+    <ul>
+      <% for (const quiz of tag.quizzes){ %>
+      <li>
+        <% if (locals.loggedInUser){ %>
+          <a href="/quiz/<%= quiz.id%>">
+        <% }%>            
+        <%= quiz.title %>
+        <% if (locals.loggedInUser){ %>
+          </a>
+        <% }%>
+      <% } %>
+    </ul>
+
+  </div>
+   <% } else{ %>
+    <span class="badge bg-primary p-2 mb-1"><%=tag.name%></span>
+    <p class="ms-2">Aucun quiz dans cette catégorie pour le moment...</p>
+   <% } %>
+  <% } %>
+
+
+
+</main>
+
+<%- include("../partials/footer") %>
